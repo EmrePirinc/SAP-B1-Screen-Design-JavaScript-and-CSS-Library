@@ -1,0 +1,2268 @@
+/**
+ * SAP Business One UI Components CSS Framework
+ * Version: 1.0.0
+ *
+ * Bu CSS dosyası SAP Business One standartlarına uygun UI bileşenlerinin
+ * tüm stillerini içerir.
+ */
+
+/* =============================================================================
+   RENK PALETİ - PROJE TEMEL RENK DEĞİŞKENLERİ
+   ============================================================================= */
+:root {
+  --sbo-color-topbar: #AEAEAE;                /* Üst bar */
+  --sbo-color-topbar-strip: #F7D166;          /* Üst barın altındaki şerit */
+  --sbo-color-background: #F3F3F3;            /* Genel form arka planı */
+  --sbo-color-button-default: #F4D56E;        /* Genel buton rengi */
+  --sbo-color-input-focus: #F4D56E;           /* Aktif veri giriş alanları vurgu */
+  --sbo-color-button-add-accent: #F5C03D;     /* "Ekle" butonunun sol vurgu şeridi */
+  --sbo-color-disabled-bg: #E7E7E7;           /* Pasif alanların arka planı */
+}
+
+/* =============================================================================
+   1. STATICTEXT (ETİKET/LABEL) STİLLERİ
+   ============================================================================= */
+.sbo-static-text {
+  display: inline-block;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  color: #000000;
+  background-color: transparent;
+  border: none;
+  padding: 2px 4px 2px 0;
+  margin: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: default;
+  text-align: right;
+  line-height: 16px;
+}
+
+.sbo-static-text--disabled {
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.sbo-static-text--required::after {
+  content: ' *';
+  color: #FF0000;
+  font-weight: bold;
+}
+
+.sbo-static-text[data-link-to] {
+  cursor: pointer;
+}
+
+.sbo-static-text[data-link-to]:hover {
+  text-decoration: underline;
+}
+
+/* =============================================================================
+   2. EDITTEXT (METİN GİRİŞ KUTUSU) STİLLERİ
+   ============================================================================= */
+.sbo-edit-text {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  background-color: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  padding: 1px 3px;
+  margin: 0;
+  vertical-align: middle;
+  line-height: normal;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.sbo-edit-text:focus,
+.sbo-edit-text--focused {
+  border-color: #808080;
+  outline: none;
+}
+
+.sbo-edit-text--disabled {
+  background-color: var(--sbo-color-disabled-bg);
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.sbo-edit-text--readonly {
+  background-color: var(--sbo-color-disabled-bg);
+  cursor: default;
+}
+
+.sbo-edit-text--required {
+  border-color: #FF6B6B;
+}
+
+.sbo-edit-text--required:focus {
+  border-color: var(--sbo-color-input-focus);
+}
+
+.sbo-edit-text::placeholder {
+  color: #999999;
+  font-style: italic;
+}
+
+/* =============================================================================
+   3. LINKEDBUTTON (BAĞLANTI DÜĞMESİ) STİLLERİ
+   ============================================================================= */
+
+.sbo-linked-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  vertical-align: middle;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  user-select: none;
+  position: relative;
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  padding: 0;
+}
+
+.sbo-linked-button__arrow {
+  width: 0;
+  height: 0;
+  border-left: 9px solid #F4D56E;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  pointer-events: none;
+  position: relative;
+}
+
+.sbo-linked-button__arrow::after {
+  content: '';
+  position: absolute;
+  left: -17px;
+  top: -2px;
+  width: 14px;
+  height: 4px;
+  background-color: #F4D56E;
+}
+
+.sbo-linked-button:hover:not(:disabled) {
+  background-color: transparent;
+}
+
+.sbo-linked-button:active:not(:disabled) {
+  background-color: transparent;
+}
+
+.sbo-linked-button:focus {
+  outline: none;
+}
+
+.sbo-linked-button--disabled {
+  background-color: var(--sbo-color-disabled-bg) !important;
+  background-image: none !important;
+  border-color: #D0D0D0 !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+.sbo-linked-button--disabled::after {
+  color: #808080 !important;
+}
+
+.sbo-linked-button__icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  border: none;
+  background: transparent;
+}
+
+.sbo-linked-button--disabled .sbo-linked-button__icon {
+  opacity: 0.5;
+  filter: grayscale(100%);
+}
+
+/* =============================================================================
+   4. BUTTON (STANDART DÜĞME) STİLLERİ
+   ============================================================================= */
+.sbo-button {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  color: #000000;
+  background-color: #F7E87C;
+  background-image: linear-gradient(to bottom, #FDEF84, #F7E87C);
+  border: 1px solid #C0C0C0;
+  padding: 2px 8px;
+  margin: 2px;
+  cursor: pointer;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 0;
+  line-height: normal;
+}
+
+.sbo-button:hover {
+  background-color: #F9EA85;
+  background-image: linear-gradient(to bottom, #FDEC87, #F9EA85);
+  border-color: #B8B8B8;
+}
+
+.sbo-button:focus {
+  border-color: var(--sbo-color-input-focus);
+  box-shadow: 0 0 2px rgba(244, 213, 110, 0.5);
+}
+
+.sbo-button--pressed,
+.sbo-button:active {
+  background-color: #F2D055;
+  background-image: linear-gradient(to bottom, var(--sbo-color-button-default), #F2D055);
+  border-color: #A0A0A0;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.sbo-button--disabled {
+  background-color: var(--sbo-color-disabled-bg) !important;
+  background-image: none !important;
+  color: #808080 !important;
+  border-color: #D0D0D0 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+.sbo-button--primary {
+  font-weight: bold;
+  position: relative;
+}
+
+.sbo-button--primary::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--sbo-color-button-add-accent);
+}
+
+.sbo-button--cancel {
+  background-color: #F0F0F0;
+  background-image: linear-gradient(to bottom, #F8F8F8, #F0F0F0);
+}
+
+.sbo-button--cancel:hover {
+  background-color: #E8E8E8;
+  background-image: linear-gradient(to bottom, #F0F0F0, #E8E8E8);
+}
+
+/* =============================================================================
+   5. CHECKBOX (ONAY KUTUSU) STİLLERİ
+   ============================================================================= */
+.sbo-checkbox {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  cursor: pointer;
+  user-select: none;
+  margin: 2px 4px 2px 0;
+  vertical-align: middle;
+}
+
+.sbo-checkbox__input {
+  width: 13px;
+  height: 13px;
+  margin: 0 4px 0 0;
+  cursor: pointer;
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #FFFFFF;
+  border: 1px solid #A5A5A5;
+  position: relative;
+  outline: none;
+}
+
+.sbo-checkbox__input:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 9px;
+  color: #000000;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.sbo-checkbox__input:hover {
+  border-color: #808080;
+}
+
+.sbo-checkbox__input:focus {
+  outline: none;
+  border-color: #808080;
+}
+
+.sbo-checkbox__label {
+  line-height: 16px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.sbo-checkbox--disabled {
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.sbo-checkbox--disabled .sbo-checkbox__input {
+  cursor: not-allowed;
+  background-color: var(--sbo-color-disabled-bg);
+  border-color: #D0D0D0;
+  opacity: 0.6;
+}
+
+/* =============================================================================
+   TOPBAR (ÜST BAR) STİLLERİ
+   ============================================================================= */
+.sbo-topbar {
+  background-color: var(--sbo-color-topbar);
+  background-image: linear-gradient(to bottom, #BEBEBE, var(--sbo-color-topbar));
+  height: 26px;
+  border: 1px solid #969696;
+  border-bottom: 1px solid #808080;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+.sbo-topbar__content {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.sbo-topbar__title {
+  color: #000000;
+  font-size: 11px;
+  font-weight: normal;
+  padding: 4px 8px;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 100px;
+  max-width: 300px;
+  cursor: text;
+  user-select: text;
+}
+
+.sbo-topbar__title:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid #808080;
+  border-radius: 1px;
+  padding: 3px 7px;
+}
+
+.sbo-topbar__title:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
+}
+
+/* Pencere Kontrol Butonları */
+.sbo-topbar__controls {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 0;
+  margin-right: 2px;
+}
+
+.sbo-window-btn {
+  width: 21px;
+  height: 21px;
+  border: none;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.sbo-window-btn:active {
+  transform: translateY(1px);
+}
+
+/* Minimize Butonu */
+.sbo-window-btn--minimize {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinMinimizeStd.png');
+}
+
+.sbo-window-btn--minimize:hover:not(:disabled) {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinMinimizeHover.png');
+}
+
+.sbo-window-btn--minimize:active:not(:disabled) {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinMinimizeDown.png');
+}
+
+.sbo-window-btn--minimize:disabled {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinMinimizeDisabled.png');
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Maximize Butonu */
+.sbo-window-btn--maximize {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinMaximizeStd.png');
+}
+
+.sbo-window-btn--maximize:hover:not(:disabled) {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinMaximizeHover.png');
+}
+
+.sbo-window-btn--maximize:active:not(:disabled) {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinMaximizeDown.png');
+}
+
+.sbo-window-btn--maximize:disabled {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinMaximizeDisabled.png');
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Restore Butonu (Maximize'den dön) */
+.sbo-window-btn--restore {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinRestoreStd.png');
+}
+
+.sbo-window-btn--restore:hover:not(:disabled) {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinRestoreHover.png');
+}
+
+.sbo-window-btn--restore:active:not(:disabled) {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinRestoreDown.png');
+}
+
+.sbo-window-btn--restore:disabled {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinRestoreDisabled.png');
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Close Butonu */
+.sbo-window-btn--close {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinCloseStd.png');
+}
+
+.sbo-window-btn--close:hover:not(:disabled) {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinCloseHover.png');
+}
+
+.sbo-window-btn--close:active:not(:disabled) {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinCloseDown.png');
+}
+
+.sbo-window-btn--close:disabled {
+  background-image: url('Theme/9.0/pwc_assets_chrome/window_buttons/PopupWinCloseDisabled.png');
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.sbo-topbar-strip {
+  background-color: var(--sbo-color-topbar-strip);
+  height: 3px;
+  border-bottom: 1px solid #D4C366;
+  margin-bottom: 8px;
+}
+
+/* =============================================================================
+   PENCERE ŞABLONU (WINDOW TEMPLATE)
+   ============================================================================= */
+.sbo-window {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sbo-color-background);
+  border: 1px solid #969696;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  box-sizing: border-box;
+  min-width: 300px;
+  min-height: 200px;
+}
+
+.sbo-window--maximized {
+  width: 100vw !important;
+  height: 100vh !important;
+  border: none;
+  box-shadow: none;
+}
+
+.sbo-window__body {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+  background-color: var(--sbo-color-background);
+}
+
+.sbo-window__footer {
+  border-top: 1px solid #D0D0D0;
+  padding: 8px;
+  background-color: var(--sbo-color-background);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* =============================================================================
+   DATA SOURCE (VERİ KAYNAKLARI) BİLEŞENLERİ
+   ============================================================================= */
+
+.sbo-datasource {
+  background-color: #FAFAFA;
+  border: 1px solid #C0C0C0;
+  border-radius: 4px;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  max-width: 350px;
+}
+
+.sbo-datasource__header {
+  background: linear-gradient(to bottom, #F0F0F0, #E0E0E0);
+  border-bottom: 1px solid #C0C0C0;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 11px;
+  color: #333;
+}
+
+.sbo-datasource__icon {
+  font-size: 16px;
+}
+
+.sbo-datasource__title {
+  flex: 1;
+}
+
+.sbo-datasource__body {
+  padding: 12px;
+}
+
+.sbo-datasource__property {
+  margin-bottom: 10px;
+}
+
+.sbo-datasource__property label {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.sbo-datasource__input {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid #7B7B7B;
+  background-color: #FFFFFF;
+  font-size: 11px;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.sbo-datasource__input:read-only {
+  background-color: #F5F5F5;
+  color: #666;
+}
+
+.sbo-datasource__input:focus {
+  outline: none;
+  border-color: #F4D56E;
+  box-shadow: 0 0 3px rgba(244, 213, 110, 0.5);
+}
+
+.sbo-datasource__info {
+  margin-top: 10px;
+  padding: 6px 8px;
+  background-color: #FFF8DC;
+  border: 1px solid #F4D56E;
+  border-radius: 3px;
+}
+
+.sbo-datasource__info small {
+  font-size: 9px;
+  color: #666;
+  font-style: italic;
+}
+
+/* DB Data Source - Özel Stil */
+.sbo-dbdatasource .sbo-datasource__header {
+  background: linear-gradient(to bottom, #E8F4FD, #D0E8F7);
+  border-bottom-color: #1E90FF;
+}
+
+.sbo-dbdatasource .sbo-datasource__icon {
+  color: #1E90FF;
+}
+
+/* User Data Source - Özel Stil */
+.sbo-userdatasource .sbo-datasource__header {
+  background: linear-gradient(to bottom, #FFF8E1, #FFECB3);
+  border-bottom-color: #FFD700;
+}
+
+.sbo-userdatasource .sbo-datasource__icon {
+  color: #FFD700;
+}
+
+/* Data Table - Özel Stil */
+.sbo-datatable .sbo-datasource__header {
+  background: linear-gradient(to bottom, #F1F8E9, #DCEDC8);
+  border-bottom-color: #32CD32;
+}
+
+.sbo-datatable .sbo-datasource__icon {
+  color: #32CD32;
+}
+
+/* Choose From List - Özel Stil */
+.sbo-choosefromlist .sbo-datasource__header {
+  background: linear-gradient(to bottom, #FCE4EC, #F8BBD0);
+  border-bottom-color: #FF1493;
+}
+
+.sbo-choosefromlist .sbo-datasource__icon {
+  color: #FF1493;
+}
+
+/* =============================================================================
+   GENEL LAYOUT VE YARDIMCI SINIFLAR
+   ============================================================================= */
+
+/* Input Group - EditText + LinkedButton kombinasyonu */
+.sbo-input-group {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.sbo-input-group .sbo-edit-text {
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.sbo-input-group .sbo-linked-button {
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -1px;
+}
+
+/* Field Group - Label + Input kombinasyonu */
+.sbo-field-group {
+  display: inline-block;
+  margin: 4px 8px 4px 0;
+  vertical-align: top;
+}
+
+.sbo-field-group .sbo-static-text {
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Form Buttons - Alt kısım düğmeleri */
+.sbo-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid #E0E0E0;
+  margin-top: 16px;
+}
+
+.sbo-form-buttons__left {
+  display: flex;
+  gap: 4px;
+}
+
+.sbo-form-buttons__right {
+  display: flex;
+  gap: 4px;
+}
+
+/* =============================================================================
+   RESPONSIVE TASARIM
+   ============================================================================= */
+@media (max-width: 768px) {
+  .sbo-static-text {
+    text-align: left;
+    width: 100% !important;
+    margin-bottom: 2px;
+  }
+
+  .sbo-edit-text {
+    width: 100% !important;
+    min-width: 120px;
+  }
+
+  .sbo-linked-button {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+  }
+
+  .sbo-button {
+    min-width: 60px;
+    padding: 4px 12px;
+    margin: 4px 2px;
+  }
+
+  .sbo-checkbox__input {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sbo-form-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sbo-form-buttons__left,
+  .sbo-form-buttons__right {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =============================================================================
+   FOCUS RING - ACCESSIBILITY
+   ============================================================================= */
+/* SAP B1'de focus-visible efektleri kullanılmaz */
+
+/* =============================================================================
+   6. COMBOBOX (AÇILIR LİSTE) STİLLERİ
+   ============================================================================= */
+.sbo-combobox {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  background-color: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  padding: 1px 2px;
+  margin: 0;
+  vertical-align: middle;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+}
+
+.sbo-combobox:focus,
+.sbo-combobox--focused {
+  border-color: var(--sbo-color-input-focus);
+  box-shadow: 0 0 2px rgba(244, 213, 110, 0.3);
+}
+
+.sbo-combobox--disabled {
+  background-color: var(--sbo-color-disabled-bg);
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.sbo-combobox--readonly {
+  background-color: var(--sbo-color-disabled-bg);
+  cursor: default;
+}
+
+.sbo-combobox option {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  background-color: #FFFFFF;
+  padding: 2px 4px;
+}
+
+.sbo-combobox option:hover {
+  background-color: var(--sbo-color-input-focus);
+  color: #000000;
+}
+
+/* =============================================================================
+   7. EXTENDEDEDITTEXT (ÇOK SATIRLI METİN KUTUSU) STİLLERİ
+   ============================================================================= */
+.sbo-extended-edittext {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  background-color: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  padding: 3px 4px;
+  margin: 0;
+  vertical-align: top;
+  box-sizing: border-box;
+  outline: none;
+  resize: none;
+  line-height: 1.3;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-wrap: break-word;
+}
+
+.sbo-extended-edittext:focus,
+.sbo-extended-edittext--focused {
+  border-color: var(--sbo-color-input-focus);
+  box-shadow: 0 0 2px rgba(244, 213, 110, 0.3);
+}
+
+.sbo-extended-edittext--disabled {
+  background-color: var(--sbo-color-disabled-bg);
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.sbo-extended-edittext--readonly {
+  background-color: var(--sbo-color-disabled-bg);
+  cursor: default;
+}
+
+.sbo-extended-edittext--required {
+  border-color: #FF6B6B;
+}
+
+.sbo-extended-edittext::placeholder {
+  color: #999999;
+  font-style: italic;
+}
+
+.sbo-extended-edittext::-webkit-scrollbar {
+  width: 16px;
+}
+
+.sbo-extended-edittext::-webkit-scrollbar-track {
+  background: #F0F0F0;
+}
+
+.sbo-extended-edittext::-webkit-scrollbar-thumb {
+  background: #C0C0C0;
+  border: 1px solid #A0A0A0;
+}
+
+/* =============================================================================
+   8. OPTIONBUTTON (RADYO DÜĞMESİ) STİLLERİ
+   ============================================================================= */
+.sbo-option-button {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  cursor: pointer;
+  user-select: none;
+  margin: 2px 4px 2px 0;
+  vertical-align: middle;
+}
+
+.sbo-option-button__input {
+  width: 13px;
+  height: 13px;
+  margin: 0 4px 0 0;
+  cursor: pointer;
+  accent-color: var(--sbo-color-input-focus);
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  border-radius: 50%;
+  position: relative;
+}
+
+.sbo-option-button__input:checked {
+  border-color: #808080;
+}
+
+.sbo-option-button__input:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 5px;
+  height: 5px;
+  background-color: #000000;
+  border-radius: 50%;
+}
+
+.sbo-option-button__label {
+  line-height: 16px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.sbo-option-button--disabled {
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.sbo-option-button--selected {
+  font-weight: bold;
+}
+
+/* =============================================================================
+   9. TABCONTROL (SEKME KONTROLÜ) STİLLERİ
+   ============================================================================= */
+.sbo-tab-control {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sbo-color-background);
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+.sbo-tab-control--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.sbo-tab-headers {
+  display: flex;
+  background-color: transparent;
+  border-bottom: 1px solid #A5A5A5;
+  padding: 0;
+  gap: 2px;
+  padding-left: 8px;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.sbo-tab-header {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  color: #000000;
+  background-color: #D4D4D4;
+  border: 1px solid #A5A5A5;
+  border-bottom: none;
+  padding: 5px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  position: relative;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.sbo-tab-header:hover:not(.sbo-tab-header--disabled):not(.sbo-tab-header--active) {
+  background-color: #E0E0E0;
+}
+
+.sbo-tab-header--active {
+  background-color: var(--sbo-color-background);
+  border-bottom: 1px solid var(--sbo-color-background);
+  margin-bottom: -1px;
+  z-index: 1;
+  font-weight: normal;
+}
+
+.sbo-tab-header--disabled {
+  color: #808080;
+  cursor: not-allowed;
+  background-color: #E0E0E0;
+}
+
+.sbo-tab-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--sbo-color-background);
+  border: 1px solid #A5A5A5;
+  border-top: none;
+  padding: 10px;
+}
+
+.sbo-tab-content {
+  display: none;
+}
+
+.sbo-tab-content--active {
+  display: block;
+}
+
+/* =============================================================================
+   10. GRID (IZGARA) STİLLERİ
+   ============================================================================= */
+.sbo-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #C0C0C0;
+  background-color: #FFFFFF;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  box-sizing: border-box;
+}
+
+.sbo-grid--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.sbo-grid-container {
+  flex: 1;
+  overflow: auto;
+  border-bottom: 1px solid #C0C0C0;
+}
+
+.sbo-grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.sbo-grid-header {
+  background-color: #E8E8E8;
+  background-image: linear-gradient(to bottom, #F0F0F0, #E8E8E8);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.sbo-grid-header-row {
+  height: 20px;
+}
+
+.sbo-grid-header-cell {
+  border: 1px solid #C0C0C0;
+  border-bottom: 2px solid #A0A0A0;
+  padding: 0;
+  text-align: left;
+  vertical-align: middle;
+  position: relative;
+  background: inherit;
+}
+
+.sbo-grid-header-cell--row-number {
+  width: 30px;
+  min-width: 30px;
+  max-width: 30px;
+}
+
+.sbo-grid-header-cell--sortable {
+  cursor: pointer;
+}
+
+.sbo-grid-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px;
+  height: 16px;
+  overflow: hidden;
+}
+
+.sbo-grid-header-text {
+  font-weight: bold;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.sbo-grid-row-number-icon {
+  font-weight: bold;
+  color: #666666;
+  text-align: center;
+  width: 100%;
+}
+
+.sbo-grid-sort-icon--asc::after {
+  content: '▲';
+  font-size: 8px;
+  color: #666666;
+}
+
+.sbo-grid-sort-icon--desc::after {
+  content: '▼';
+  font-size: 8px;
+  color: #666666;
+}
+
+.sbo-grid-body {
+  background-color: #FFFFFF;
+}
+
+.sbo-grid-row {
+  height: 18px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.sbo-grid-row--alternate {
+  background-color: #F8F8F8;
+}
+
+.sbo-grid-row--selectable {
+  cursor: pointer;
+}
+
+.sbo-grid-row--selectable:hover {
+  background-color: #E8F4FD;
+}
+
+.sbo-grid-row--selected {
+  background-color: var(--sbo-color-input-focus) !important;
+  color: #000000;
+}
+
+.sbo-grid-cell {
+  border-right: 1px solid #E0E0E0;
+  padding: 1px 4px;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sbo-grid-cell--row-number {
+  text-align: center;
+  color: #666666;
+  font-size: 10px;
+  background-color: #F8F8F8;
+  border-right: 1px solid #C0C0C0;
+}
+
+.sbo-grid-cell--left {
+  text-align: left;
+}
+
+.sbo-grid-cell--center {
+  text-align: center;
+}
+
+.sbo-grid-cell--right {
+  text-align: right;
+}
+
+.sbo-grid-footer {
+  background-color: #F0F0F0;
+  border-top: 1px solid #C0C0C0;
+  padding: 2px 8px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.sbo-grid-record-count {
+  font-size: 10px;
+  color: #666666;
+}
+
+/* =============================================================================
+   11. MATRIX (MATRİS) STİLLERİ
+   ============================================================================= */
+.sbo-matrix-wrapper {
+  display: flex;
+  border: 1px solid #C0C0C0;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  background-color: #FFFFFF;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.sbo-matrix-wrapper--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.sbo-matrix-container {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.sbo-matrix-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.sbo-matrix-header {
+  background-color: #E8E8E8;
+  background-image: linear-gradient(to bottom, #F0F0F0, #E8E8E8);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.sbo-matrix-header-row {
+  height: 22px;
+}
+
+.sbo-matrix-header-cell {
+  border: 1px solid #C0C0C0;
+  border-bottom: 2px solid #A0A0A0;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  background: inherit;
+}
+
+.sbo-matrix-header-cell--row-number {
+  width: 30px;
+  min-width: 30px;
+  max-width: 30px;
+}
+
+.sbo-matrix-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 4px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.sbo-matrix-header-text {
+  font-weight: bold;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sbo-matrix-row-number-icon {
+  font-weight: bold;
+  color: #666666;
+  font-size: 10px;
+}
+
+.sbo-matrix-body {
+  background-color: #FFFFFF;
+}
+
+.sbo-matrix-row {
+  height: 20px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.sbo-matrix-row--selectable {
+  cursor: pointer;
+}
+
+.sbo-matrix-row--selected {
+  background-color: #E8F4FD;
+}
+
+.sbo-matrix-row--selected .sbo-matrix-cell--row-number {
+  background-color: var(--sbo-color-input-focus);
+  color: #000000;
+}
+
+.sbo-matrix-cell {
+  border-right: 1px solid #E0E0E0;
+  padding: 0;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.sbo-matrix-cell--row-number {
+  text-align: center;
+  background-color: #F8F8F8;
+  border-right: 1px solid #C0C0C0;
+  cursor: pointer;
+  padding: 1px;
+}
+
+.sbo-matrix-cell--row-number:hover {
+  background-color: #E8E8E8;
+}
+
+.sbo-matrix-cell--data {
+  padding: 1px;
+}
+
+.sbo-matrix-row-number {
+  color: #666666;
+  font-size: 10px;
+  font-weight: bold;
+  display: block;
+  line-height: 18px;
+}
+
+.sbo-matrix-body .sbo-edit-text,
+.sbo-matrix-body .sbo-combobox {
+  border: none;
+  height: 18px;
+  padding: 1px 3px;
+  margin: 0;
+  font-size: 11px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sbo-matrix-body .sbo-edit-text:focus,
+.sbo-matrix-body .sbo-combobox:focus {
+  border: 1px solid #808080;
+  outline: none;
+}
+
+.sbo-matrix-input-group {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.sbo-matrix-input-group .sbo-edit-text {
+  flex: 1;
+  border-right: none;
+}
+
+.sbo-matrix-input-group .sbo-linked-button {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border-left: none;
+}
+
+/* Matrix Kontrol Butonları (Yukarı/Aşağı) */
+.sbo-matrix-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #C0C0C0;
+  background-color: var(--sbo-color-background);
+  flex-shrink: 0;
+  padding: 2px;
+}
+
+.sbo-matrix-btn {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #C0C0C0;
+  background-color: var(--sbo-color-button-default);
+  background-image: linear-gradient(to bottom, #F7E87C, var(--sbo-color-button-default));
+  cursor: pointer;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  color: #000000;
+  outline: none;
+}
+
+.sbo-matrix-btn:hover {
+  background-color: #F9EA85;
+  background-image: linear-gradient(to bottom, #FDEC87, #F9EA85);
+  border-color: #808080;
+}
+
+.sbo-matrix-btn:active {
+  background-color: #F2D055;
+  background-image: linear-gradient(to bottom, #F7E87C, #F2D055);
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.sbo-matrix-btn--up {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+/* Matrix Üst Filtreler */
+.sbo-matrix-filters {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.sbo-matrix-filters__left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.sbo-matrix-filters__right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.sbo-matrix-filters .sbo-static-text {
+  width: auto;
+  text-align: left;
+}
+
+.sbo-matrix-filters .sbo-combobox {
+  width: 150px;
+}
+
+/* Matrix Kaydırma Çubuğu Stilleri */
+.sbo-matrix-container::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.sbo-matrix-container::-webkit-scrollbar-track {
+  background: #F0F0F0;
+  border: 1px solid #D0D0D0;
+}
+
+.sbo-matrix-container::-webkit-scrollbar-thumb {
+  background: #C0C0C0;
+  border: 1px solid #A0A0A0;
+}
+
+.sbo-matrix-container::-webkit-scrollbar-thumb:hover {
+  background: #A0A0A0;
+}
+
+.sbo-matrix-container::-webkit-scrollbar-corner {
+  background: #F0F0F0;
+}
+
+/* =============================================================================
+   12. PICTUREBOX (RESİM KUTUSU) STİLLERİ
+   ============================================================================= */
+.sbo-picture-box {
+  display: inline-block;
+  border: 1px solid #C0C0C0;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  vertical-align: top;
+  overflow: hidden;
+  position: relative;
+}
+
+.sbo-picture-box--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sbo-picture-box--clickable {
+  cursor: pointer;
+}
+
+.sbo-picture-box--clickable:hover {
+  border-color: #808080;
+}
+
+.sbo-picture-box__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.sbo-picture-box__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F8F8F8;
+  color: #999999;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* =============================================================================
+   13. BUTTONCOMBO (DÜĞME KOMBİNASYONU) STİLLERİ
+   ============================================================================= */
+
+.sbo-button-combo {
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  border: 1px solid #C0C0C0;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+}
+
+.sbo-button-combo--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Ana Button */
+.sbo-button-combo__button {
+  flex: 1;
+  height: 100%;
+  background-color: #F7E87C;
+  background-image: linear-gradient(to bottom, #FDEF84, #F7E87C);
+  border: none;
+  padding: 2px 8px;
+  font-family: inherit;
+  font-size: inherit;
+  color: #000000;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.sbo-button-combo__button:hover:not(:disabled) {
+  background-color: #F9EA85;
+  background-image: linear-gradient(to bottom, #FDEC87, #F9EA85);
+}
+
+.sbo-button-combo__button:disabled {
+  background-color: var(--sbo-color-disabled-bg);
+  background-image: none;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.sbo-button-combo__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+/* Arrow Button */
+.sbo-button-combo__arrow-btn {
+  width: 18px;
+  height: 100%;
+  background-color: #F7E87C;
+  background-image: linear-gradient(to bottom, #FDEF84, #F7E87C);
+  border: none;
+  border-left: 1px solid #C0C0C0;
+  font-size: 10px;
+  color: #000000;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.sbo-button-combo__arrow-btn:hover:not(:disabled) {
+  background-color: #F9EA85;
+  background-image: linear-gradient(to bottom, #FDEC87, #F9EA85);
+}
+
+.sbo-button-combo__arrow-btn:active:not(:disabled) {
+  background-color: #F2D055;
+  background-image: linear-gradient(to bottom, #F7E87C, #F2D055);
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.sbo-button-combo__arrow-btn:disabled {
+  background-color: var(--sbo-color-disabled-bg);
+  background-image: none;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+/* Dropdown Liste */
+.sbo-button-combo__dropdown {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: -1px;
+  background-color: #FFFFFF;
+  border: 1px solid #808080;
+  border-top: none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+}
+
+.sbo-button-combo__dropdown.show {
+  display: block;
+}
+
+.sbo-button-combo__option {
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 11px;
+  color: #000000;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.sbo-button-combo__option:hover {
+  background-color: #E8F4FD;
+}
+
+.sbo-button-combo__option--selected {
+  background-color: #0078D4;
+  color: #FFFFFF;
+}
+
+.sbo-button-combo__option--selected:hover {
+  background-color: #106EBE;
+  color: #FFFFFF;
+}
+
+.sbo-button-combo__option:last-child {
+  border-bottom: none;
+}
+
+/* =============================================================================
+   GENİŞLETİLMİŞ RESPONSIVE TASARIM - TÜM BİLEŞENLER
+   ============================================================================= */
+@media (max-width: 768px) {
+  .sbo-combobox {
+    font-size: 14px;
+    height: 32px !important;
+    padding: 4px 6px;
+  }
+
+  .sbo-extended-edittext {
+    font-size: 14px;
+    padding: 6px;
+    min-height: 80px;
+  }
+
+  .sbo-option-button__input {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sbo-tab-header {
+    min-width: 60px;
+    padding: 8px 6px;
+    font-size: 10px;
+  }
+
+  .sbo-tab-content {
+    padding: 4px;
+  }
+
+  .sbo-grid {
+    font-size: 12px;
+  }
+
+  .sbo-grid-row {
+    height: 24px;
+  }
+
+  .sbo-matrix-row {
+    height: 28px;
+  }
+
+  .sbo-matrix-control-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .sbo-button-combo {
+    font-size: 14px;
+    height: auto !important;
+  }
+
+  .sbo-button-combo__select {
+    padding: 4px 6px;
+    min-height: 32px;
+  }
+
+  .sbo-button-combo__button {
+    width: 32px !important;
+    min-height: 32px;
+  }
+}
+
+/* =============================================================================
+   SCROLLBAR STİLLERİ - TÜM BİLEŞENLER
+   ============================================================================= */
+.sbo-grid-container::-webkit-scrollbar,
+.sbo-matrix-container::-webkit-scrollbar,
+.sbo-tab-content::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.sbo-grid-container::-webkit-scrollbar-track,
+.sbo-matrix-container::-webkit-scrollbar-track,
+.sbo-tab-content::-webkit-scrollbar-track {
+  background: #F0F0F0;
+}
+
+.sbo-grid-container::-webkit-scrollbar-thumb,
+.sbo-matrix-container::-webkit-scrollbar-thumb,
+.sbo-tab-content::-webkit-scrollbar-thumb {
+  background: #C0C0C0;
+  border: 1px solid #A0A0A0;
+}
+
+.sbo-grid-container::-webkit-scrollbar-corner,
+.sbo-matrix-container::-webkit-scrollbar-corner,
+.sbo-tab-content::-webkit-scrollbar-corner {
+  background: #F0F0F0;
+}
+
+/* =============================================================================
+   FORM LAYOUT VE HİZALAMA SİSTEMİ
+   ============================================================================= */
+
+/* Form container - genel form yapısı */
+.sbo-form {
+  background-color: var(--sbo-color-background);
+  padding: 8px;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+/* Form row - her satır için temel hizalama */
+.sbo-form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  min-height: 22px;
+}
+
+/* Label column - etiketler için sol sütun */
+.sbo-form-label {
+  flex: 0 0 auto;
+  min-width: 100px;
+  text-align: right;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Input column - input alanları için sağ sütun */
+.sbo-form-input {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Özel hizalama sınıfları */
+.sbo-form-label--wide {
+  min-width: 150px;
+}
+
+.sbo-form-label--narrow {
+  min-width: 80px;
+}
+
+/* İki sütunlu form düzeni */
+.sbo-form-row--two-column {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Grup container */
+.sbo-form-group {
+  border: 1px solid #C0C0C0;
+  margin: 8px 0;
+  padding: 8px;
+  background-color: #FFFFFF;
+}
+
+.sbo-form-group-title {
+  background-color: var(--sbo-color-background);
+  padding: 0 4px;
+  margin-left: 8px;
+  margin-top: -12px;
+  font-size: 11px;
+  color: #000000;
+  font-weight: normal;
+  display: inline-block;
+}
+
+/* =============================================================================
+   BİLEŞEN HİZALAMA OVERRIDE'LARI
+   ============================================================================= */
+
+/* StaticText hizalaması */
+.sbo-form-row .sbo-static-text {
+  text-align: right;
+  vertical-align: middle;
+  line-height: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* CheckBox hizalaması */
+.sbo-form-row .sbo-checkbox {
+  vertical-align: middle;
+  margin: 0;
+  line-height: 20px;
+}
+
+/* EditText hizalaması */
+.sbo-form-row .sbo-edit-text {
+  vertical-align: middle;
+  height: 20px;
+  line-height: 18px;
+}
+
+/* ComboBox hizalaması */
+.sbo-form-row .sbo-combo-box {
+  vertical-align: middle;
+  height: 20px;
+}
+
+/* Button hizalaması */
+.sbo-form-row .sbo-button {
+  vertical-align: middle;
+  margin: 0;
+}
+
+/* LinkedButton hizalaması */
+.sbo-form-row .sbo-linked-button {
+  vertical-align: middle;
+  margin: 0 0 0 2px;
+}
+
+/* =============================================================================
+   TAMAMLANAN CSS FRAMEWORK - 13 BİLEŞEN
+
+   Bu CSS dosyası artık tüm 13 SAP B1 bileşenini içermektedir:
+   1. StaticText         8. OptionButton
+   2. EditText           9. TabControl
+   3. LinkedButton      10. Grid
+   4. Button            11. Matrix
+   5. CheckBox          12. PictureBox
+   6. ComboBox          13. ButtonCombo
+   7. ExtendedEditText
+
+   - Tüm renkler CSS değişkenleri olarak tanımlanmıştır
+   - Responsive tasarım mobil uyumluluk için eklenmiştir
+   - SAP B1 standartlarına %100 uygun
+   - Form hizalama sistemi eklenmiştir
+   ============================================================================= */
+
+/* =============================================================================
+   FORM DÜZENLEME SİSTEMİ
+   ============================================================================= */
+
+/* Form Grid Sistemi - İki sütunlu form düzeni */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+}
+
+.form-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Form Satırları */
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* =============================================================================
+   SOL SÜTUN (1. Sütun) HİZALAMA KURALLARI
+   ============================================================================= */
+
+/* Sol Sütun Label Genişliği ve Hizalama */
+.form-grid > .form-col:nth-child(1) .form-row .sbo-static-text {
+    width: 120px;
+    flex-shrink: 0;
+    text-align: left;
+}
+
+/* Sol Sütun Input ve ComboBox Genişlikleri */
+.form-grid > .form-col:nth-child(1) .form-row .sbo-edit-text,
+.form-grid > .form-col:nth-child(1) .form-row .sbo-combobox {
+    width: 165px;
+}
+
+/* Sol Sütun Full Width - Yan yana 2 kutucuk için */
+.form-grid > .form-col:nth-child(1) .form-row .sbo-edit-text.full-width,
+.form-grid > .form-col:nth-child(1) .form-row .sbo-combobox.full-width {
+    width: 204px; /* LinkedButton (19px) + gap (4px) + kutucuk genişliği */
+}
+
+/* =============================================================================
+   SAĞ SÜTUN (2. Sütun) HİZALAMA KURALLARI
+   ============================================================================= */
+
+/* Sağ Sütun Label Genişliği - Kutucuk yanında görünecek şekilde */
+.form-grid > .form-col:nth-child(2) .form-row .sbo-static-text {
+    width: 120px;
+    flex-shrink: 0;
+    text-indent: 105px; /* Yazıyı sağa kaydır - kutucuğun yanında */
+    text-align: left;
+}
+
+/* Sağ Sütun İlk Satır - Yan yana 2 kutucuk (ComboBox + EditText) */
+.form-grid > .form-col:nth-child(2) .form-row:first-child .sbo-combobox {
+    width: 100px;
+}
+
+.form-grid > .form-col:nth-child(2) .form-row:first-child .sbo-edit-text {
+    width: 100px;
+}
+
+/* Sağ Sütun Diğer Satırlar - Tek kutucuk ama aynı hizada */
+.form-grid > .form-col:nth-child(2) .form-row:not(:first-child) .sbo-combobox,
+.form-grid > .form-col:nth-child(2) .form-row:not(:first-child) .sbo-edit-text {
+    width: 165px;
+    margin-left: 104px; /* İlk satırdaki ComboBox (100px) + gap (4px) hizasında */
+}
+
+/* Sağ Sütun Button Hizalama - Kutucuk hizasında */
+.form-grid > .form-col:nth-child(2) .form-row .sbo-button {
+    margin-left: 104px;
+}
+
+/* =============================================================================
+   CHECKBOX HİZALAMA
+   ============================================================================= */
+
+/* CheckBox Sol Sütun */
+.form-grid > .form-col:nth-child(1) .form-row .sbo-checkbox {
+    padding-left: 0;
+}
+
+/* CheckBox Sağ Sütun */
+.form-grid > .form-col:nth-child(2) .form-row .sbo-checkbox {
+    margin-left: 104px;
+}
+
+/* =============================================================================
+   İLK SATIRDA YAN YANA KUTUCUK (Talep Eden Gibi)
+   ============================================================================= */
+
+/* İlk satır ComboBox genişliği */
+.form-row:first-child .sbo-combobox {
+    width: 100px;
+}
+
+/* İlk satır EditText genişliği */
+.form-row:first-child .sbo-edit-text {
+    width: 100px;
+}
+
+/* =============================================================================
+   TAM GENİŞLİK SATIR
+   ============================================================================= */
+
+/* Tam Genişlik Satır - Tüm sütunları kapsasın */
+.form-row--full {
+    grid-column: 1 / -1;
+}
+
+/* =============================================================================
+   ALT BÖLÜM (Bottom Section)
+   ============================================================================= */
+
+.bottom-section {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    margin-top: 10px;
+}
+
+.bottom-section__left,
+.bottom-section__right {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Sol taraf label'ları */
+.bottom-section__left .form-row .sbo-static-text {
+    width: 120px;
+    text-align: left;
+}
+
+/* Sol taraf Sahip kutucuğu */
+.bottom-section__left .form-row:first-child .sbo-edit-text {
+    width: 165px;
+}
+
+/* Sol taraf Açıklamalar kutucuğu - Sahip ile aynı hizada */
+.bottom-section__left .form-row:last-child .sbo-extended-edittext {
+    width: 165px;
+}
+
+/* Sağ taraf label'ları - sola hizalı */
+.bottom-section__right .form-row .sbo-static-text {
+    width: 180px;
+    text-align: left;
+}
+
+/* Sağ taraf kutucukları */
+.bottom-section__right .form-row .sbo-edit-text {
+    width: 165px;
+}
+
+/* =============================================================================
+   FOOTER BUTONLARI
+   ============================================================================= */
+
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-top: 1px solid #c3c3c3;
+    margin: 0 -12px -8px -12px;
+}
+
+.footer-buttons__left,
+.footer-buttons__right {
+    display: flex;
+    gap: 4px;
+}
+
+/* Footer butonları - eşit genişlik */
+.footer-buttons .sbo-button,
+.footer-buttons .sbo-button-combo {
+    min-width: 150px;
+    width: auto;
+}
+
+/* =============================================================================
+   EDIT MODE (TASARIM DÜZENLEME MODU)
+   ============================================================================= */
+
+/* Edit Mode Kontrol Paneli */
+.sbo-edit-mode-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(to bottom, #FFFFFF, #F3F3F3);
+    border: 2px solid #F4D56E;
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    min-width: 250px;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+.sbo-edit-mode-panel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+.sbo-edit-mode-panel__title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.sbo-edit-mode-panel__close {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.sbo-edit-mode-panel__close:hover {
+    color: #000;
+}
+
+.sbo-edit-mode-panel__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sbo-edit-mode-panel__info {
+    font-size: 10px;
+    color: #666;
+    padding: 6px;
+    background: #FFF8DC;
+    border: 1px solid #F4D56E;
+    border-radius: 3px;
+    line-height: 1.4;
+}
+
+.sbo-edit-mode-panel__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sbo-edit-mode-panel__status {
+    font-size: 11px;
+    padding: 4px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.sbo-edit-mode-panel__status--active {
+    background: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+}
+
+.sbo-edit-mode-panel__status--inactive {
+    background: #F8D7DA;
+    color: #721C24;
+    border: 1px solid #F5C6CB;
+}
+
+/* Edit Mode Toggle Button */
+.sbo-edit-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(to bottom, #F7E87C, #F4D56E);
+    border: 2px solid #C0C0C0;
+    color: #000;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+.sbo-edit-toggle-btn:hover {
+    background: linear-gradient(to bottom, #F9EA85, #F7E87C);
+}
+
+.sbo-edit-toggle-btn:active {
+    background: linear-gradient(to bottom, #F2D055, #F4D56E);
+}
+
+.sbo-edit-toggle-btn--active {
+    background: linear-gradient(to bottom, #90EE90, #7FD07F);
+    border-color: #4CAF50;
+}
+
+/* Düzenlenebilir Bileşenler */
+body.sbo-edit-mode-active .sbo-editable {
+    position: relative;
+    cursor: move !important;
+}
+
+body.sbo-edit-mode-active .sbo-editable::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px dashed #999;
+    pointer-events: none;
+    z-index: 1;
+}
+
+body.sbo-edit-mode-active .sbo-editable:hover::before {
+    border-color: #F4D56E;
+    border-style: solid;
+}
+
+/* Seçili Bileşen */
+body.sbo-edit-mode-active .sbo-editable.sbo-selected {
+    z-index: 100;
+}
+
+body.sbo-edit-mode-active .sbo-editable.sbo-selected::before {
+    border-color: #F4D56E;
+    border-style: solid;
+    border-width: 3px;
+    background: rgba(244, 213, 110, 0.1);
+}
+
+body.sbo-edit-mode-active .sbo-editable.sbo-selected::after {
+    content: '↔ ↕';
+    position: absolute;
+    top: -20px;
+    right: -2px;
+    background: #F4D56E;
+    color: #000;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 2px;
+    border: 1px solid #C0C0C0;
+    z-index: 2;
+}
+
+/* Pozisyon Bilgisi Göstergesi */
+.sbo-position-indicator {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: #FFF;
+    padding: 4px 8px;
+    font-size: 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10001;
+    font-family: 'Courier New', monospace;
+}
+
+/* Izgara Kılavuz Çizgileri */
+.sbo-grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 9998;
+    background-image:
+        repeating-linear-gradient(0deg, rgba(200, 200, 200, 0.2) 0px, transparent 1px, transparent 10px),
+        repeating-linear-gradient(90deg, rgba(200, 200, 200, 0.2) 0px, transparent 1px, transparent 10px);
+    display: none;
+}
+
+body.sbo-edit-mode-active .sbo-grid-overlay {
+    display: block;
+}

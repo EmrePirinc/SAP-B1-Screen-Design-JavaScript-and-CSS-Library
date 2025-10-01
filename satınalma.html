@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAP B1 - Satınalma Talebi</title>
+    <style>
+        /**
+         * SAP Business One UI Components CSS Framework
+         * Version: 1.0.0
+         *
+         * Bu CSS dosyası SAP Business One standartlarına uygun UI bileşenlerinin
+         * tüm stillerini içerir.
+         */
+
+        /* =============================================================================
+           RENK PALETİ - PROJE TEMEL RENK DEĞİŞKENLERİ
+           ============================================================================= */
+        :root {
+          --sbo-color-topbar: #AEAEAE;                /* Üst bar */
+          --sbo-color-topbar-strip: #F7D166;          /* Üst barın altındaki şerit */
+          --sbo-color-background: #F3F3F3;            /* Genel form arka planı */
+          --sbo-color-button-default: #F4D56E;        /* Genel buton rengi */
+          --sbo-color-input-focus: #F4D56E;           /* Aktif veri giriş alanları vurgu */
+          --sbo-color-button-add-accent: #F5C03D;     /* "Ekle" butonunun sol vurgu şeridi */
+          --sbo-color-disabled-bg: #E7E7E7;           /* Pasif alanların arka planı */
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #dcdcdc;
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        }
+
+        /* =============================================================================
+           1. STATICTEXT (ETİKET/LABEL) STİLLERİ
+           ============================================================================= */
+        .sbo-static-text {
+          display: inline-block;
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          font-weight: normal;
+          color: #000000;
+          background-color: transparent;
+          border: none;
+          padding: 2px 4px 2px 0;
+          margin: 0;
+          vertical-align: middle;
+          white-space: nowrap;
+          cursor: default;
+          text-align: right;
+          line-height: 16px;
+        }
+
+        .sbo-static-text--disabled {
+          color: #808080;
+          cursor: not-allowed;
+        }
+
+        .sbo-static-text--required::after {
+          content: ' *';
+          color: #FF0000;
+          font-weight: bold;
+        }
+
+        .sbo-static-text[data-link-to] {
+          cursor: pointer;
+        }
+
+        .sbo-static-text[data-link-to]:hover {
+          text-decoration: underline;
+        }
+
+        /* =============================================================================
+           2. EDITTEXT (METİN GİRİŞ KUTUSU) STİLLERİ
+           ============================================================================= */
+        .sbo-edit-text {
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          color: #000000;
+          background-color: #FFFFFF;
+          border: 1px solid #7F9DB9;
+          padding: 1px 3px;
+          margin: 0;
+          vertical-align: middle;
+          line-height: normal;
+          box-sizing: border-box;
+          outline: none;
+          height: 19px;
+        }
+
+        .sbo-edit-text:focus,
+        .sbo-edit-text--focused {
+          border-color: #F4D56E;
+        }
+
+        .sbo-edit-text--disabled {
+          background-color: var(--sbo-color-disabled-bg);
+          color: #000000;
+          cursor: not-allowed;
+        }
+
+        /* =============================================================================
+           3. LINKEDBUTTON (BAĞLANTI DÜĞMESİ) STİLLERİ
+           ============================================================================= */
+
+        .sbo-linked-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          vertical-align: middle;
+          box-sizing: border-box;
+          outline: none;
+          user-select: none;
+          position: relative;
+          width: 19px;
+          height: 19px;
+          margin: 0;
+          padding: 0;
+        }
+
+        .sbo-linked-button__arrow {
+            width: 0;
+            height: 0;
+            border-left: 7px solid #F4D56E;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            position: relative;
+        }
+
+        .sbo-linked-button:active:not(:disabled) {
+          transform: translateY(1px);
+        }
+
+        .sbo-linked-button:focus {
+          outline: none;
+        }
+
+        .sbo-linked-button--disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        /* =============================================================================
+           4. BUTTON (STANDART DÜĞME) STİLLERİ
+           ============================================================================= */
+        .sbo-button {
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          color: #000000;
+          background-color: var(--sbo-color-button-default);
+          border: 1px solid #7F9DB9;
+          padding: 2px 8px;
+          margin: 2px;
+          cursor: pointer;
+          vertical-align: middle;
+          text-align: center;
+          white-space: nowrap;
+          box-sizing: border-box;
+          outline: none;
+          min-height: 23px;
+        }
+
+        .sbo-button:hover {
+          border-color: #F4D56E;
+        }
+
+        .sbo-button--pressed,
+        .sbo-button:active {
+          box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .sbo-button--primary {
+            font-weight: bold;
+        }
+
+        .sbo-button--disabled {
+          background-color: var(--sbo-color-disabled-bg) !important;
+          color: #808080 !important;
+          border-color: #b7b7b7 !important;
+          cursor: not-allowed !important;
+          box-shadow: none !important;
+        }
+
+        /* =============================================================================
+           5. CHECKBOX (ONAY KUTUSU) STİLLERİ
+           ============================================================================= */
+        .sbo-checkbox {
+          display: inline-flex;
+          align-items: center;
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          color: #000000;
+          cursor: pointer;
+          user-select: none;
+          margin: 2px 4px 2px 0;
+          vertical-align: middle;
+        }
+
+        .sbo-checkbox__input {
+          width: 13px;
+          height: 13px;
+          margin: 0 4px 0 0;
+          cursor: pointer;
+          vertical-align: middle;
+          appearance: none;
+          background-color: #FFFFFF;
+          border: 1px solid #7F9DB9;
+          position: relative;
+          outline: none;
+        }
+
+        .sbo-checkbox__input:checked::after {
+          content: '✓';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 10px;
+          color: #000000;
+          font-weight: bold;
+          line-height: 1;
+        }
+
+        /* =============================================================================
+           PENCERE ŞABLONU (WINDOW TEMPLATE)
+           ============================================================================= */
+        .sbo-window {
+          display: flex;
+          flex-direction: column;
+          background-color: var(--sbo-color-background);
+          border: 1px solid #969696;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          box-sizing: border-box;
+          min-width: 300px;
+          min-height: 200px;
+        }
+
+        .sbo-topbar {
+            background-color: var(--sbo-color-topbar);
+            height: 26px;
+            border-bottom: 1px solid #808080;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            padding: 0 4px;
+        }
+        
+        .sbo-topbar__title {
+            color: #000000;
+            font-size: 11px;
+            font-weight: normal;
+        }
+        
+        .sbo-topbar__controls {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .sbo-window-btn {
+            width: 21px;
+            height: 21px;
+            border: 1px solid transparent;
+            background-color: transparent;
+            cursor: pointer;
+            font-family: 'Marlett', 'Segoe UI Symbol';
+            font-size: 12px;
+            line-height: 21px;
+            text-align: center;
+        }
+        .sbo-window-btn:hover{
+            border: 1px solid #F4D56E;
+        }
+        .sbo-window-btn--close {
+            font-weight: bold;
+        }
+
+        .sbo-topbar-strip {
+          background-color: var(--sbo-color-topbar-strip);
+          height: 3px;
+          border-bottom: 1px solid #D4C366;
+        }
+
+        .sbo-window__body {
+          flex: 1;
+          overflow: auto;
+          padding: 8px 12px;
+        }
+        
+        /* =============================================================================
+           6. COMBOBOX (AÇILIR LİSTE) STİLLERİ
+           ============================================================================= */
+        .sbo-combobox {
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          color: #000000;
+          background-color: #FFFFFF;
+          border: 1px solid #7F9DB9;
+          padding: 0px 2px;
+          margin: 0;
+          vertical-align: middle;
+          box-sizing: border-box;
+          outline: none;
+          cursor: pointer;
+          height: 19px;
+        }
+        
+        .sbo-combobox--disabled {
+          background-color: var(--sbo-color-disabled-bg);
+          color: #000000;
+          cursor: not-allowed;
+        }
+        
+        /* =============================================================================
+           7. EXTENDEDEDITTEXT (ÇOK SATIRLI METİN KUTUSU) STİLLERİ
+           ============================================================================= */
+        .sbo-extended-edittext {
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          color: #000000;
+          background-color: #FFFFFF;
+          border: 1px solid #7F9DB9;
+          padding: 3px 4px;
+          margin: 0;
+          vertical-align: top;
+          box-sizing: border-box;
+          outline: none;
+          resize: none;
+        }
+        
+        /* =============================================================================
+           9. TABCONTROL (SEKME KONTROLÜ) STİLLERİ
+           ============================================================================= */
+        .sbo-tab-control {
+          background-color: var(--sbo-color-background);
+          box-sizing: border-box;
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        }
+
+        .sbo-tab-headers {
+          display: flex;
+          background-color: transparent;
+          border-bottom: 1px solid #A5A5A5;
+          padding: 0;
+          gap: 2px;
+          padding-left: 8px;
+        }
+
+        .sbo-tab-header {
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          color: #000000;
+          background-color: #D4D4D4;
+          border: 1px solid #A5A5A5;
+          border-bottom: none;
+          padding: 5px 14px;
+          cursor: pointer;
+          white-space: nowrap;
+          outline: none;
+          position: relative;
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
+        }
+
+        .sbo-tab-header--active {
+          background-color: var(--sbo-color-background);
+          border-bottom: 1px solid var(--sbo-color-background);
+          margin-bottom: -1px;
+          z-index: 1;
+          font-weight: normal;
+        }
+
+        .sbo-tab-header:not(.sbo-tab-header--active):hover {
+          background-color: #E0E0E0;
+        }
+
+        .sbo-tab-container {
+          position: relative;
+          background-color: var(--sbo-color-background);
+          padding: 10px;
+          border: 1px solid #A5A5A5;
+          border-top: none;
+        }
+
+        .sbo-tab-content {
+          display: none;
+        }
+
+        .sbo-tab-content--active {
+          display: block;
+        }
+
+        /* =============================================================================
+           11. MATRIX (MATRİS) STİLLERİ
+           ============================================================================= */
+        .sbo-matrix-wrapper {
+          display: flex;
+          border: 1px solid #A5A5A5;
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          background-color: #fff;
+          position: relative;
+        }
+
+        .sbo-matrix-container {
+          flex: 1;
+          overflow-x: auto;
+          overflow-y: auto;
+          max-height: 400px;
+        }
+
+        .sbo-matrix-table {
+          width: max-content;
+          min-width: 100%;
+          border-collapse: collapse;
+        }
+
+        .sbo-matrix-header th {
+          background-color: #E6E6E6;
+          border: 1px solid #A5A5A5;
+          padding: 3px 5px;
+          text-align: left;
+          font-weight: normal;
+          position: sticky;
+          top: 0;
+          z-index: 10;
+        }
+        .sbo-matrix-header th:first-child{
+            background-color: var(--sbo-color-background);
+        }
+
+        .sbo-matrix-body td {
+          border: 1px solid #E3E3E3;
+          padding: 0;
+          height: 19px;
+        }
+
+        .sbo-matrix-body td:first-child {
+            text-align: center;
+            background-color: var(--sbo-color-disabled-bg);
+            color: #808080;
+            border-right: 1px solid #A5A5A5;
+        }
+
+        .sbo-matrix-body .sbo-edit-text,
+        .sbo-matrix-body .sbo-combobox {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+        .sbo-matrix-body .sbo-edit-text:focus,
+        .sbo-matrix-body .sbo-combobox:focus {
+            border: 1px solid #F4D56E;
+        }
+
+        /* Matrix Kontrol Butonları */
+        .sbo-matrix-controls {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border-left: 1px solid #A5A5A5;
+          background-color: var(--sbo-color-background);
+          padding: 2px;
+        }
+
+        .sbo-matrix-btn {
+          width: 20px;
+          height: 20px;
+          border: 1px solid #A5A5A5;
+          background-color: var(--sbo-color-button-default);
+          cursor: pointer;
+          font-size: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          margin: 0;
+        }
+
+        .sbo-matrix-btn:hover {
+          background-color: #F9EA85;
+          border-color: #808080;
+        }
+
+        .sbo-matrix-btn:active {
+          background-color: #F2D055;
+          box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .sbo-matrix-btn--up {
+          border-bottom: none;
+          margin-bottom: 2px;
+        }
+
+        /* Matrix Üst Filtreler */
+        .sbo-matrix-filters {
+          display: flex;
+          justify-content: space-between;
+          padding: 5px 0;
+          margin-bottom: 5px;
+          align-items: center;
+        }
+
+        .sbo-matrix-filters__left {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+
+        .sbo-matrix-filters__right {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          margin-left: auto;
+        }
+
+        .sbo-matrix-filters .sbo-static-text {
+          width: auto;
+          text-align: left;
+        }
+
+        .sbo-matrix-filters .sbo-combobox {
+          width: 150px;
+        }
+
+        /* Kaydırma Çubuğu Stilleri */
+        .sbo-matrix-container::-webkit-scrollbar {
+          width: 16px;
+          height: 16px;
+        }
+
+        .sbo-matrix-container::-webkit-scrollbar-track {
+          background: #F0F0F0;
+        }
+
+        .sbo-matrix-container::-webkit-scrollbar-thumb {
+          background: #C0C0C0;
+          border: 1px solid #A0A0A0;
+        }
+
+        .sbo-matrix-container::-webkit-scrollbar-corner {
+          background: #F0F0F0;
+        }
+
+        /* =============================================================================
+           13. BUTTONCOMBO (DÜĞME KOMBİNASYONU) STİLLERİ
+           ============================================================================= */
+
+        .sbo-button-combo {
+          display: inline-flex;
+          position: relative;
+          vertical-align: middle;
+          font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+          font-size: 11px;
+          border: 1px solid #C0C0C0;
+          background-color: #FFFFFF;
+          box-sizing: border-box;
+        }
+
+        .sbo-button-combo--disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        /* Ana Button */
+        .sbo-button-combo__button {
+          flex: 1;
+          height: 100%;
+          background-color: #F7E87C;
+          background-image: linear-gradient(to bottom, #FDEF84, #F7E87C);
+          border: none;
+          padding: 2px 8px;
+          font-family: inherit;
+          font-size: inherit;
+          color: #000000;
+          text-align: left;
+          cursor: pointer;
+          outline: none;
+          box-sizing: border-box;
+        }
+
+        .sbo-button-combo__button:hover:not(:disabled) {
+          background-color: #F9EA85;
+          background-image: linear-gradient(to bottom, #FDEC87, #F9EA85);
+        }
+
+        .sbo-button-combo__button:disabled {
+          background-color: var(--sbo-color-disabled-bg);
+          background-image: none;
+          color: #808080;
+          cursor: not-allowed;
+        }
+
+        .sbo-button-combo__text {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          pointer-events: none;
+        }
+
+        /* Arrow Button */
+        .sbo-button-combo__arrow-btn {
+          width: 18px;
+          height: 100%;
+          background-color: #F7E87C;
+          background-image: linear-gradient(to bottom, #FDEF84, #F7E87C);
+          border: none;
+          border-left: 1px solid #C0C0C0;
+          font-size: 10px;
+          color: #000000;
+          cursor: pointer;
+          outline: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+        }
+
+        .sbo-button-combo__arrow-btn:hover:not(:disabled) {
+          background-color: #F9EA85;
+          background-image: linear-gradient(to bottom, #FDEC87, #F9EA85);
+        }
+
+        .sbo-button-combo__arrow-btn:active:not(:disabled) {
+          background-color: #F2D055;
+          background-image: linear-gradient(to bottom, #F7E87C, #F2D055);
+          box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .sbo-button-combo__arrow-btn:disabled {
+          background-color: var(--sbo-color-disabled-bg);
+          background-image: none;
+          color: #808080;
+          cursor: not-allowed;
+        }
+
+        /* Dropdown Liste */
+        .sbo-button-combo__dropdown {
+          position: absolute;
+          top: 100%;
+          left: -1px;
+          right: -1px;
+          background-color: #FFFFFF;
+          border: 1px solid #808080;
+          border-top: none;
+          box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+          z-index: 1000;
+          max-height: 200px;
+          overflow-y: auto;
+          display: none;
+        }
+
+        .sbo-button-combo__dropdown.show {
+          display: block;
+        }
+
+        .sbo-button-combo__option {
+          padding: 4px 8px;
+          cursor: pointer;
+          font-size: 11px;
+          color: #000000;
+          background-color: #FFFFFF;
+          border-bottom: 1px solid #E0E0E0;
+        }
+
+        .sbo-button-combo__option:hover {
+          background-color: #E8F4FD;
+        }
+
+        .sbo-button-combo__option--selected {
+          background-color: #0078D4;
+          color: #FFFFFF;
+        }
+
+        .sbo-button-combo__option--selected:hover {
+          background-color: #106EBE;
+          color: #FFFFFF;
+        }
+
+        .sbo-button-combo__option:last-child {
+          border-bottom: none;
+        }
+
+        /* LAYOUT & HELPERS */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 40px;
+        }
+        .form-col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .form-row .sbo-static-text {
+            width: 120px;
+            flex-shrink: 0;
+        }
+
+        /* Sağ Sütun Label Genişliği - Yazıyı sağa kaydır ama label genişliğini sabit tut */
+        .form-grid > .form-col:nth-child(2) .form-row .sbo-static-text {
+            width: 120px; /* Genişlik değişmemeli */
+            text-indent: 105px; /* Yazıları sağa yasla - kutucuğun yanında */
+        }
+        .form-row .sbo-edit-text,
+        .form-row .sbo-combobox {
+            width: 165px;
+        }
+        .form-row .sbo-edit-text.full-width,
+        .form-row .sbo-combobox.full-width {
+            width: 204px; /* Kullanıcı ComboBox (100px) + manager EditText (100px) + gap (4px) */
+        }
+        .form-row .sbo-checkbox {
+            padding-left: 0; /* Yazılar ile aynı hizada */
+        }
+        .form-row--full {
+             grid-column: 1 / -1;
+        }
+
+        /* Sağ Sütun Özel Hizalama */
+        .form-grid > .form-col:nth-child(2) .form-row:not(:first-child) .sbo-combobox,
+        .form-grid > .form-col:nth-child(2) .form-row:not(:first-child) .sbo-edit-text {
+            margin-left: 104px; /* Birincil ComboBox (100px) + gap (4px) */
+        }
+
+        /* Sol Sütun Label'ları Sol Hizalı */
+        .form-grid > .form-col:nth-child(1) .form-row .sbo-static-text {
+            text-align: left;
+        }
+
+        /* Sağ Sütun Label'ları Sol Hizalı */
+        .form-grid > .form-col:nth-child(2) .form-row .sbo-static-text {
+            text-align: left;
+        }
+
+        /* İlk satır ComboBox'ları için özel genişlik - Kullanıcı ve Birincil */
+        .form-row:first-child .sbo-combobox {
+            width: 100px;
+        }
+
+        /* Referans alınan belge satırı - buton kutucuk hizasında */
+        .form-grid > .form-col:nth-child(2) .form-row .sbo-button {
+            margin-left: 104px; /* Kutucuk hizasında */
+        }
+
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            margin-top: 10px;
+        }
+
+        .bottom-section__left,
+        .bottom-section__right {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        /* Sol taraf label'ları */
+        .bottom-section__left .form-row .sbo-static-text {
+            width: 120px;
+            text-align: left;
+        }
+
+        /* Sol taraf Sahip kutucuğu */
+        .bottom-section__left .form-row:first-child .sbo-edit-text {
+            width: 165px;
+        }
+
+        /* Sol taraf Açıklamalar kutucuğu - Sahip ile aynı hizada */
+        .bottom-section__left .form-row:last-child .sbo-extended-edittext {
+            width: 165px;
+        }
+
+        /* Sağ taraf label'ları - sola hizalı */
+        .bottom-section__right .form-row .sbo-static-text {
+            width: 180px;
+            text-align: left;
+        }
+
+        /* Sağ taraf kutucukları */
+        .bottom-section__right .form-row .sbo-edit-text {
+            width: 165px;
+        }
+        .footer-buttons{
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-top: 1px solid #c3c3c3;
+            margin: 0 -12px -8px -12px;
+        }
+        .footer-buttons__left{
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        /* Pasif butonlar arası boşluk */
+        .footer-buttons > .sbo-button {
+            margin-left: 4px;
+        }
+
+        /* İlk doğrudan child button'ı sağa yaslama */
+        .footer-buttons > .sbo-button:first-of-type {
+            margin-left: auto !important;
+        }
+
+        /* Footer butonları - Sol tarafa padding */
+        .footer-buttons__left {
+            padding-left: 8px;
+        }
+
+        /* Footer butonları - Sağ tarafa padding */
+        .footer-buttons__right {
+            padding-right: 8px;
+        }
+
+        /* Footer butonları - Tüm butonlar eşit genişlikte ve yükseklikte */
+        .footer-buttons .sbo-button {
+            width: 150px !important;
+            min-width: 150px !important;
+            height: 21px !important;
+        }
+
+        .footer-buttons .sbo-button-combo {
+            width: 150px;
+            height: 21px;
+        }
+
+        /* Footer'daki pasif butonlar normal sarı button gibi görünmeli */
+        .footer-buttons .sbo-button.sbo-button--disabled,
+        .footer-buttons .sbo-button:disabled {
+            background-color: #F7E87C !important;
+            background-image: linear-gradient(to bottom, #FDEF84, #F7E87C) !important;
+            color: #000000 !important;
+            border-color: #A0A0A0 !important;
+            cursor: not-allowed !important;
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="purchaseRequestForm"></div>
+
+    <script>
+        // JS Bileşen oluşturma fonksiyonları buraya eklenecek
+        // Normalde bu fonksiyonlar sbo-components.js dosyasından gelir.
+        // Tek dosya olması için buraya ekliyorum.
+        
+        function createSBOStaticText(options = {}) {
+            const { caption = 'Label', linkTo = null, isRequired = false, isDisabled = false, customClass = '' } = options;
+            const linkAttribute = linkTo ? `data-link-to="${linkTo}"` : '';
+            return `<label class="sbo-static-text ${customClass}" ${linkAttribute}>${caption}:</label>`;
+        }
+
+        function createSBOEditText(options = {}) {
+            const { uniqueId = '', value = '', placeholder = '', isDisabled = false } = options;
+            const disabledAttr = isDisabled ? 'disabled' : '';
+            const disabledClass = isDisabled ? 'sbo-edit-text--disabled' : '';
+            return `<input type="text" id="${uniqueId}" class="sbo-edit-text ${disabledClass}" value="${value}" placeholder="${placeholder}" ${disabledAttr}>`;
+        }
+        
+        function createSBOLinkedButton(options = {}) {
+            const { linkTo = '', isDisabled = false } = options;
+            const disabledClass = isDisabled ? 'sbo-linked-button--disabled' : '';
+            return `<button type="button" class="sbo-linked-button ${disabledClass}" data-link-to="${linkTo}"><span class="sbo-linked-button__arrow"></span></button>`;
+        }
+
+        function createSBOComboBox(options = {}) {
+            const { uniqueId = '', values = [], selectedValue = '', isDisabled = false } = options;
+            const disabledAttr = isDisabled ? 'disabled' : '';
+            const disabledClass = isDisabled ? 'sbo-combobox--disabled' : '';
+            let optionsHtml = values.map(v => `<option value="${v.value}" ${v.value === selectedValue ? 'selected' : ''}>${v.text}</option>`).join('');
+            return `<select id="${uniqueId}" class="sbo-combobox ${disabledClass}" ${disabledAttr}>${optionsHtml}</select>`;
+        }
+
+        function createSBOCheckBox(options = {}) {
+            const { uniqueId = '', caption = '', isChecked = false } = options;
+            const checkedAttr = isChecked ? 'checked' : '';
+            return `<label class="sbo-checkbox"><input type="checkbox" id="${uniqueId}" class="sbo-checkbox__input" ${checkedAttr}> <span class="sbo-checkbox__label">${caption}</span></label>`;
+        }
+        
+
+        function createSBOExtendedEditText(options = {}) {
+            const { uniqueId = '', value = '', rows = 3 } = options;
+            return `<textarea id="${uniqueId}" class="sbo-extended-edittext" rows="${rows}">${value}</textarea>`;
+        }
+
+        function createSBOButton(options = {}) {
+          const {
+            uniqueId = 'btn_' + Date.now(),
+            caption = 'Button',
+            buttonType = 'text',
+            iconPath = null,
+            width = 'auto',
+            height = '23px',
+            minWidth = '75px',
+            isDisabled = false,
+            isPrimary = false,
+            isCancel = false,
+            tabIndex = null,
+            onClick = null
+          } = options;
+
+          const disabledClass = isDisabled ? 'sbo-button--disabled' : '';
+          const primaryClass = isPrimary ? 'sbo-button--primary' : '';
+          const cancelClass = isCancel ? 'sbo-button--cancel' : '';
+          const imageClass = buttonType === 'image' ? 'sbo-button--image' : '';
+
+          const disabledAttr = isDisabled ? 'disabled' : '';
+          const tabIndexAttr = tabIndex ? `tabindex="${tabIndex}"` : '';
+          const onClickAttr = onClick ? `onclick="${onClick}"` : '';
+
+          let buttonContent = '';
+          if (buttonType === 'image' && iconPath) {
+            buttonContent = `<img src="${iconPath}" alt="${caption}" class="sbo-button__icon" />`;
+          } else {
+            buttonContent = caption;
+          }
+
+          const specialStyles = [];
+          if (isPrimary) {
+            specialStyles.push('border-left: 3px solid var(--sbo-color-button-add-accent);');
+          }
+
+          const styleAttr = [
+            `width: ${width};`,
+            `height: ${height};`,
+            `min-width: ${minWidth};`,
+            ...specialStyles
+          ].join(' ');
+
+          return `
+            <button type="button"
+                    id="${uniqueId}"
+                    class="sbo-button ${disabledClass} ${primaryClass} ${cancelClass} ${imageClass}"
+                    style="${styleAttr}"
+                    ${disabledAttr}
+                    ${tabIndexAttr}
+                    ${onClickAttr}
+                    onmousedown="handleButtonMouseDown(this)"
+                    onmouseup="handleButtonMouseUp(this)"
+                    onmouseleave="handleButtonMouseLeave(this)">
+              ${buttonContent}
+            </button>
+          `;
+        }
+
+        function handleButtonMouseDown(button) {
+          if (!button.disabled) {
+            button.classList.add('sbo-button--pressed');
+          }
+        }
+
+        function handleButtonMouseUp(button) {
+          button.classList.remove('sbo-button--pressed');
+        }
+
+        function handleButtonMouseLeave(button) {
+          button.classList.remove('sbo-button--pressed');
+        }
+
+        function createSBOButtonCombo(options = {}) {
+          const {
+            uniqueId = 'buttonCombo_' + Date.now(),
+            width = '150px',
+            height = '21px',
+            buttonCaption = 'Eylem',
+            validValues = [],
+            selectedValue = '',
+            isDisabled = false,
+            dataSource = null,
+            onButtonClick = null,
+            onSelectionChange = null
+          } = options;
+
+          const disabledClass = isDisabled ? 'sbo-button-combo--disabled' : '';
+          const disabledAttr = isDisabled ? 'disabled' : '';
+          const dataAttribute = dataSource ? `data-source="${dataSource}"` : '';
+          const buttonClickAttr = onButtonClick ? `onclick="${onButtonClick}"` : '';
+          const selectionChangeAttr = onSelectionChange ? `data-on-change="${onSelectionChange}"` : '';
+
+          let optionsHTML = '';
+          validValues.forEach(item => {
+            const selectedClass = item.value === selectedValue ? 'sbo-button-combo__option--selected' : '';
+            optionsHTML += `
+              <div class="sbo-button-combo__option ${selectedClass}"
+                   data-value="${item.value}"
+                   onclick="selectButtonComboOption('${uniqueId}', '${item.value}', '${item.description}')">
+                ${item.description}
+              </div>
+            `;
+          });
+
+          return `
+            <div id="${uniqueId}"
+                 class="sbo-button-combo ${disabledClass}"
+                 style="width: ${width}; height: ${height};"
+                 ${dataAttribute}
+                 ${selectionChangeAttr}>
+              <button type="button"
+                      class="sbo-button-combo__button"
+                      onclick="handleButtonComboMainClick('${uniqueId}')"
+                      ${buttonClickAttr}
+                      ${disabledAttr}>
+                <span class="sbo-button-combo__text">${buttonCaption}</span>
+              </button>
+              <button type="button"
+                      class="sbo-button-combo__arrow-btn"
+                      onclick="toggleButtonComboDropdown('${uniqueId}')"
+                      ${disabledAttr}
+                      title="Seçenekleri Göster">
+                ◢
+              </button>
+              <div class="sbo-button-combo__dropdown">
+                ${optionsHTML}
+              </div>
+              <select class="sbo-button-combo__hidden-select"
+                      name="${dataSource || uniqueId}"
+                      style="display: none;">
+                ${validValues.map(item =>
+                  `<option value="${item.value}" ${item.value === selectedValue ? 'selected' : ''}>${item.description}</option>`
+                ).join('')}
+              </select>
+            </div>
+          `;
+        }
+
+        function handleButtonComboMainClick(uniqueId) {
+          const container = document.getElementById(uniqueId);
+          const hiddenSelect = container.querySelector('.sbo-button-combo__hidden-select');
+          const selectedValue = hiddenSelect.value;
+          const selectedText = hiddenSelect.options[hiddenSelect.selectedIndex]?.text || '';
+          console.log('ButtonCombo clicked:', uniqueId, selectedValue, selectedText);
+        }
+
+        function toggleButtonComboDropdown(uniqueId) {
+          const container = document.getElementById(uniqueId);
+          const dropdown = container.querySelector('.sbo-button-combo__dropdown');
+          document.querySelectorAll('.sbo-button-combo__dropdown.show').forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              otherDropdown.classList.remove('show');
+            }
+          });
+          dropdown.classList.toggle('show');
+        }
+
+        function selectButtonComboOption(uniqueId, value, description) {
+          const container = document.getElementById(uniqueId);
+          const hiddenSelect = container.querySelector('.sbo-button-combo__hidden-select');
+          const dropdown = container.querySelector('.sbo-button-combo__dropdown');
+
+          dropdown.querySelectorAll('.sbo-button-combo__option--selected').forEach(option => {
+            option.classList.remove('sbo-button-combo__option--selected');
+          });
+
+          const selectedOption = dropdown.querySelector(`[data-value="${value}"]`);
+          if (selectedOption) {
+            selectedOption.classList.add('sbo-button-combo__option--selected');
+          }
+
+          hiddenSelect.value = value;
+          dropdown.classList.remove('show');
+
+          const onChange = container.getAttribute('data-on-change');
+          if (onChange && typeof window[onChange] === 'function') {
+            window[onChange](value, description);
+          }
+        }
+
+        function createSBOTabControl(options = {}) {
+            const { tabs = [] } = options;
+            const headers = tabs.map((tab, index) => `<button class="sbo-tab-header ${index === 0 ? 'sbo-tab-header--active' : ''}" data-tab="${tab.id}">${tab.caption}</button>`).join('');
+            const contents = tabs.map((tab, index) => `<div class="sbo-tab-content ${index === 0 ? 'sbo-tab-content--active' : ''}" id="${tab.id}">${tab.content}</div>`).join('');
+
+            return `
+                <div class="sbo-tab-control">
+                    <div class="sbo-tab-headers">${headers}</div>
+                    <div class="sbo-tab-container">${contents}</div>
+                </div>`;
+        }
+
+        function createSBOMatrix(options = {}) {
+            const { columns = [], rowCount = 8 } = options;
+            const headerCells = columns.map(col => `<th style="width: ${col.width || 'auto'}">${col.title}</th>`).join('');
+            let bodyRows = '';
+            for (let i = 1; i <= rowCount; i++) {
+                const bodyCells = columns.map(col => {
+                    if (col.id === '#') {
+                        return `<td>${i}</td>`;
+                    }
+                    if(col.type === 'static') {
+                        return `<td></td>`
+                    }
+                    if(col.type === 'combobox') {
+                        return `<td>${createSBOComboBox({uniqueId: col.id + '_' + i, values: col.values || []})}</td>`;
+                    }
+                    return `<td>${createSBOEditText({value: ''})}</td>`;
+                }).join('');
+                bodyRows += `<tr>${bodyCells}</tr>`;
+            }
+
+            return `
+                <div class="sbo-matrix-wrapper">
+                    <div class="sbo-matrix-container">
+                        <table class="sbo-matrix-table">
+                            <thead class="sbo-matrix-header">
+                                <tr>${headerCells}</tr>
+                            </thead>
+                            <tbody class="sbo-matrix-body">
+                                ${bodyRows}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="sbo-matrix-controls">
+                        <button class="sbo-matrix-btn sbo-matrix-btn--up">▲</button>
+                        <button class="sbo-matrix-btn sbo-matrix-btn--down">▼</button>
+                    </div>
+                </div>`;
+        }
+
+        function createSBOWindow(options = {}) {
+            const { title, content, footer } = options;
+            return `
+            <div class="sbo-window">
+                <div class="sbo-topbar">
+                    <span class="sbo-topbar__title">${title}</span>
+                    <div class="sbo-topbar__controls">
+                        <button class="sbo-window-btn sbo-window-btn--minimize">0</button>
+                        <button class="sbo-window-btn sbo-window-btn--maximize">1</button>
+                        <button class="sbo-window-btn sbo-window-btn--close">r</button>
+                    </div>
+                </div>
+                <div class="sbo-topbar-strip"></div>
+                <div class="sbo-window__body">
+                    ${content}
+                </div>
+                <div class="footer-buttons">
+                    ${footer}
+                </div>
+            </div>`;
+        }
+
+        // 1. ÜST GÖVDE OLUŞTURMA
+        const headerContent = `
+            <div class="form-grid">
+                <!-- Sol Sütun -->
+                <div class="form-col">
+                    <div class="form-row">
+                        ${createSBOStaticText({caption: 'Talep eden'})}
+                        ${createSBOLinkedButton({linkTo: 'requesterCode'})}
+                        ${createSBOComboBox({uniqueId: 'requester', selectedValue: 'kullanici', values: [{value: 'kullanici', text:'Kullanıcı'}, {value: 'manager', text:'manager'}]})}
+                        <input type="text" id="requesterCode" class="sbo-edit-text" value="manager" style="width: 100px;">
+                    </div>
+                    <div class="form-row">
+                        ${createSBOStaticText({caption: 'Talep edenin adı'})}
+                        <input type="text" id="requesterName" class="sbo-edit-text" value="manager" style="width: 204px; margin-left: 23px;">
+                    </div>
+                    <div class="form-row">
+                        ${createSBOStaticText({caption: 'Şube'})}
+                        ${createSBOLinkedButton({linkTo: 'branch'})}
+                        <select id="branch" class="sbo-combobox" style="width: 204px;">
+                            <option value="fabrika" selected>Orthaus - Fabrika</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        ${createSBOStaticText({caption: 'Departman'})}
+                        <select id="department" class="sbo-combobox" style="width: 204px; margin-left: 23px;">
+                            <option value="bakimhane" selected>Bakımhane</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                         ${createSBOCheckBox({uniqueId: 'saOrder', caption: 'SA sprş.veya SA siparişi mal girişi eklendiğinde e-posta g.'})}
+                    </div>
+                    <div class="form-row">
+                        ${createSBOStaticText({caption: 'E-posta adresi'})}
+                        <input type="text" id="email" class="sbo-edit-text" style="width: 204px; margin-left: 23px;">
+                    </div>
+                </div>
+                <!-- Sağ Sütun -->
+                <div class="form-col">
+                    <div class="form-row">
+                        ${createSBOStaticText({caption: 'No'})}
+                        ${createSBOComboBox({uniqueId: 'series', values: [{value: 'birincil', text:'Birincil'}]})}
+                        <input type="text" id="docNum" class="sbo-edit-text sbo-edit-text--disabled" value="46" disabled>
+                    </div>
+                     <div class="form-row">
+                        ${createSBOStaticText({caption: 'Durum'})}
+                        <input type="text" id="status" class="sbo-edit-text sbo-edit-text--disabled" value="Açık" disabled>
+                    </div>
+                     <div class="form-row">
+                        ${createSBOStaticText({caption: 'Kayıt tarihi'})}
+                        ${createSBOEditText({uniqueId: 'postingDate2', value: '28/09/2025', isDisabled: true})}
+                    </div>
+                     <div class="form-row">
+                        ${createSBOStaticText({caption: 'Geçerlilik bitiş'})}
+                        ${createSBOEditText({uniqueId: 'validUntil', value: '28/10/2025', isDisabled: true})}
+                    </div>
+                     <div class="form-row">
+                        ${createSBOStaticText({caption: 'Belge tarihi'})}
+                        ${createSBOEditText({uniqueId: 'docDate', value: '28/09/2025', isDisabled: true})}
+                    </div>
+                     <div class="form-row">
+                        ${createSBOStaticText({caption: 'Gerekli tarih'})}
+                        ${createSBOEditText({uniqueId: 'requiredDate'})}
+                    </div>
+                     <div class="form-row" style="margin-top: 8px;">
+                        ${createSBOStaticText({caption: 'Referans alınan belge'})}
+                        ${createSBOButton({caption: '...'})}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // 2. ORTA GÖVDE (SEKMELER VE MATRİS) OLUŞTURMA
+        const matrixFilters = `
+            <div class="sbo-matrix-filters">
+                <div class="sbo-matrix-filters__left">
+                    ${createSBOStaticText({caption: 'Kalem/hizmet türü'})}
+                    ${createSBOComboBox({uniqueId: 'filterType', values: [{value: '', text: 'Kalem'}, {value: 'hizmet', text: 'Hizmet'}]})}
+                </div>
+                <div class="sbo-matrix-filters__right">
+                    ${createSBOStaticText({caption: 'Özet türü'})}
+                    ${createSBOComboBox({uniqueId: 'filterSummary', values: [{value: '', text: 'Özet yok'}, {value: 'ozet1', text: 'Özet 1'}]})}
+                </div>
+            </div>
+        `;
+
+        const matrix = createSBOMatrix({
+            columns: [
+                {id: '#', title: '#', width: '30px'},
+                {id: 'kalem_numarasi', title: 'Kalem numarası', width: '120px', type: 'edittext'},
+                {id: 'kalem_tanimi', title: 'Kalem tanımı', width: '200px', type: 'edittext'},
+                {id: 'satici', title: 'Satıcı', width: '80px', type: 'edittext'},
+                {id: 'gerekli_tarih', title: 'Gerekli tarih', width: '100px', type: 'edittext'},
+                {id: 'gerekli_miktar', title: 'Gerekli miktar', width: '100px', type: 'edittext'},
+                {id: 'bilgi_fiyat', title: 'Bilgi - fiyat', width: '100px', type: 'static'}
+            ]
+        });
+
+        const tabButtons = `<div style="margin-bottom: 5px;">${createSBOButton({caption: 'İçerikler'})} ${createSBOButton({caption: 'Ekler'})}</div>`;
+
+        const middleContent = createSBOTabControl({
+            tabs: [
+                {id: 'contents', caption: 'İçerikler', content: matrixFilters + matrix},
+                {id: 'attachments', caption: 'Ekler', content: 'Ekler buraya gelecek.'}
+            ]
+        });
+
+        // 3. ALT GÖVDE OLUŞTURMA
+        const bottomContent = `
+            <div class="bottom-section">
+                <!-- Sol Alt -->
+                <div class="bottom-section__left">
+                    <div class="form-row">
+                        ${createSBOStaticText({caption: 'Sahip'})}
+                        ${createSBOEditText({uniqueId: 'owner'})}
+                    </div>
+                    <div class="form-row" style="align-items: flex-start;">
+                        ${createSBOStaticText({caption: 'Açıklamalar'})}
+                        ${createSBOExtendedEditText({uniqueId: 'remarks', rows: 4})}
+                    </div>
+                </div>
+                <!-- Sağ Alt -->
+                <div class="bottom-section__right">
+                     <div class="form-row">
+                        ${createSBOStaticText({caption: 'İndirim öncesi toplam'})}
+                        ${createSBOEditText({uniqueId: 'totalBeforeDiscount', isDisabled: true})}
+                    </div>
+                     <div class="form-row">
+                        ${createSBOStaticText({caption: 'Vergi'})}
+                        ${createSBOEditText({uniqueId: 'tax', isDisabled: true})}
+                    </div>
+                     <div class="form-row">
+                        ${createSBOStaticText({caption: 'Vadesi gelmiş ödeme top.'})}
+                        ${createSBOEditText({uniqueId: 'totalPaymentDue', value: '0,00 TRY', isDisabled: true})}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // 4. FOOTER DÜĞMELERİ OLUŞTURMA
+        const footerContent = `
+            <div class="footer-buttons">
+                <div class="footer-buttons__left">
+                    ${createSBOButtonCombo({
+                        uniqueId: 'btnAdd',
+                        width: '150px',
+                        height: '21px',
+                        buttonCaption: 'Ekle ve yeni',
+                        validValues: [
+                            {value: 'add', description: 'Ekle ve yeni'},
+                            {value: 'addClose', description: 'Ekle ve kapat'}
+                        ],
+                        selectedValue: 'add',
+                        onButtonClick: 'handleAddDocument',
+                        onSelectionChange: 'handleAddTypeChange'
+                    })}
+                    ${createSBOButtonCombo({
+                        uniqueId: 'btnDraft',
+                        width: '150px',
+                        height: '21px',
+                        buttonCaption: 'Taslak & yeni ekle',
+                        validValues: [
+                            {value: 'draft', description: 'Taslak & yeni ekle'},
+                            {value: 'draftClose', description: 'Taslak & kapat'}
+                        ],
+                        selectedValue: 'draft',
+                        onButtonClick: 'handleSaveDraft',
+                        onSelectionChange: 'handleDraftTypeChange'
+                    })}
+                    ${createSBOButton({
+                        caption: 'İptal',
+                        height: '21px'
+                    })}
+                </div>
+                ${createSBOButton({
+                    caption: 'Kopyalama kaynağı',
+                    height: '21px',
+                    isDisabled: true
+                })}
+                ${createSBOButton({
+                    caption: 'Kopyalama hedefi',
+                    height: '21px',
+                    isDisabled: true
+                })}
+            </div>
+        `;
+
+        // TÜM BÖLÜMLERİ BİRLEŞTİR VE PENCEREYİ OLUŞTUR
+        const fullFormContent = `
+            ${headerContent}
+            ${middleContent}
+            ${bottomContent}
+        `;
+        
+        const purchaseRequestWindow = createSBOWindow({
+            title: 'Satınalma talebi',
+            content: fullFormContent,
+            footer: footerContent
+        });
+
+        document.getElementById('purchaseRequestForm').innerHTML = purchaseRequestWindow;
+        
+        // Sekme değiştirme işlevselliği
+        document.querySelectorAll('.sbo-tab-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabContainer = button.closest('.sbo-tab-control');
+                tabContainer.querySelectorAll('.sbo-tab-header').forEach(b => b.classList.remove('sbo-tab-header--active'));
+                button.classList.add('sbo-tab-header--active');
+                
+                tabContainer.querySelectorAll('.sbo-tab-content').forEach(content => content.classList.remove('sbo-tab-content--active'));
+                document.getElementById(button.dataset.tab).classList.add('sbo-tab-content--active');
+            });
+        });
+
+    </script>
+</body>
+</html>
